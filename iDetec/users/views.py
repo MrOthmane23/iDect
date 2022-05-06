@@ -30,7 +30,7 @@ def login_user(request):
             login(request, user)
             return redirect('users/')
         else:
-            messages.success(request, "Username or password not correct!!")
+            messages.success(request, "Username password not correct!!")
             return redirect('users/login/')
 
 
