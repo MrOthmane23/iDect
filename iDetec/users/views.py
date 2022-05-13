@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .models import User
+from .models import User,Images
 
 
 def home(request):
@@ -84,3 +84,14 @@ def create(request):
         user.save()
 
         return redirect('/users')
+
+def upload(request):
+        if request.method == "POST":
+            if len(request.FILES) != 0:
+                image = request.FILES['img']
+            ap = Images(None, image)
+            ap.save()
+            # messages.error(request, "Product Added Successfully")
+            return redirect('/')
+        else:
+            return render(request, 'upload.html')
