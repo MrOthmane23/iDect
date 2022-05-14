@@ -2,6 +2,7 @@ from pyexpat.errors import messages
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -89,9 +90,26 @@ def upload(request):
         if request.method == "POST":
             if len(request.FILES) != 0:
                 image = request.FILES['img']
+                fss = FileSystemStorage()
+                file = fss.save(image.name, image)
+                file_url = fss.url(file)
             ap = Images(None, image)
             ap.save()
-            # messages.error(request, "Product Added Successfully")
+
             return redirect('/')
         else:
             return render(request, 'upload.html')
+
+def addAnom(request,id):
+    image = Images.objects.filter(id=id).get
+    return render(request,'anomalie.html',{
+        'image': image
+    })
+
+def listAnom(request):
+
+    images = Images.objects.all();
+
+    return render(request,'listAno.html',{
+        'images' : images
+    })

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 
 from . import views
@@ -9,9 +11,8 @@ urlpatterns = [
     path('add/', views.create),
     path('edit/<int:id>', views.edit),
     path('delete/<int:id>', views.delete),
-<<<<<<< HEAD
-=======
     path('upload/', views.upload, name='upload'),
-
->>>>>>> 3a38b269f3791c6e75e40b072666f3f0fc8d2300
-]
+    #anomalies
+    path('anomalies/<int:id>/add', views.addAnom, name='add-ano'),
+    path('anomalies/', views.listAnom, name='list-ano'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
