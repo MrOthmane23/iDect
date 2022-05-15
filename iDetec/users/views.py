@@ -20,21 +20,6 @@ def index(request):
     })
 
 
-def login_user(request):
-    if request.method == "GET":
-        return render(request, 'registration/login.html')
-    else:
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('users/')
-        else:
-            messages.success(request, "Username or password not correct!!")
-            return redirect('users/login/')
-
-
 def detail(request, id):
     user = User.objects.get(pk=id)
     # profil
@@ -90,13 +75,11 @@ def upload(request):
         if request.method == "POST":
             if len(request.FILES) != 0:
                 image = request.FILES['img']
-                fss = FileSystemStorage()
-                file = fss.save(image.name, image)
-                file_url = fss.url(file)
+
             ap = Images(None, image)
             ap.save()
 
-            return redirect('/')
+            return redirect('list-ano')
         else:
             return render(request, 'upload.html')
 
@@ -113,3 +96,21 @@ def listAnom(request):
     return render(request,'listAno.html',{
         'images' : images
     })
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dash')
+        else:
+            messages.success(request,"Your passWord or username is not correct !")
+            return render(request,'registration/login.html',{})
+    else:
+        return render(request,'registration/login.html',{})
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
