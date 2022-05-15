@@ -12,7 +12,7 @@ class User(models.Model):
 
 class Images(models.Model):
     id = models.IntegerField
-    chemin = models.ImageField(upload_to="static/filepath", null=True, blank=True)
+    chemin = models.ImageField(upload_to="imageAno", null=True, blank=True)
 
 class Anomaly(models.Model):
     id = models.IntegerField

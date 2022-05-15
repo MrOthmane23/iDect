@@ -14,6 +14,8 @@ def home(request):
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
     users = User.objects.all()
     return render(request, 'CRUD/listUser.html', {
         'users': users
@@ -21,6 +23,8 @@ def index(request):
 
 
 def detail(request, id):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
     user = User.objects.get(pk=id)
     # profil
     return render(request, 'profile.html', {
@@ -29,6 +33,8 @@ def detail(request, id):
 
 
 def edit(request, id):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
     id1 = id
     if request.method == "GET":
         user = User.objects.filter(id=id).get
@@ -50,12 +56,16 @@ def edit(request, id):
 
 
 def delete(request, id):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
     user = User.objects.get(pk=id).delete()
 
     return redirect('/users')
 
 
 def create(request):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
     if request.method == "GET":
         return render(request, 'CRUD/createUser.html')
     else:
@@ -71,26 +81,35 @@ def create(request):
 
         return redirect('/users')
 
+
+
+
+
 def upload(request):
-        if request.method == "POST":
-            if len(request.FILES) != 0:
-                image = request.FILES['img']
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
+    if request.method == "POST":
+        if len(request.FILES) != 0:
+            image = request.FILES['img']
 
-            ap = Images(None, image)
-            ap.save()
+        ap = Images(None, image)
+        ap.save()
 
-            return redirect('list-ano')
-        else:
-            return render(request, 'upload.html')
+        return redirect('list-ano')
+    else:
+        return render(request, 'upload.html')
 
 def addAnom(request,id):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
     image = Images.objects.filter(id=id).get
     return render(request,'anomalie.html',{
         'image': image
     })
 
 def listAnom(request):
-
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
     images = Images.objects.all();
 
     return render(request,'listAno.html',{
