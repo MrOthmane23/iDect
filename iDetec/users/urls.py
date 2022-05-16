@@ -14,4 +14,6 @@ urlpatterns = [
     #anomalies
     path('anomalies/<int:id>/add', views.addAnom, name='add-ano'),
     path('anomalies/', views.listAnom, name='list-ano'),
+    path('listanomali/', views.listanno),
+    path('showAno/<int:id>', views.showAno),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

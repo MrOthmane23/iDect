@@ -79,9 +79,9 @@
                             <!-- App Search-->
                             <form class="app-search d-none d-md-block">
                                 <div class="position-relative">
-                                    <input type="text" class="form-control" placeholder="Search..." autocomplete="off" id="search-options" value="">
-                                    <span class="mdi mdi-magnify search-widget-icon"></span>
-                                    <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
+                                    <input type="hidden" class="form-control" placeholder="Search..." autocomplete="off" id="search-options" value="">
+                                    <span style="display : none;" class="mdi mdi-magnify search-widget-icon"></span>
+                                    <span style="display : none;" class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
                                     <div data-simplebar="init" style="max-height: 320px;"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px;">
@@ -309,6 +309,9 @@
                                         </li>
                                         <li class="nav-item">
                                             <a href="/users/anomalies" class="nav-link" data-key="t-file-uploads">Manage Anomalies</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/users/listanomali" class="nav-link" data-key="t-file-uploads">List Anomalies</a>
                                         </li>
 
                                     </ul>

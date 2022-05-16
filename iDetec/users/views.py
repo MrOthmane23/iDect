@@ -162,3 +162,23 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+def listanno(request):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
+    anomaly = Anomaly.objects.all()
+
+    return render(request, 'listanomali.html', {
+        'anomaly': anomaly
+    })
+
+def showAno(request,id):
+    if not request.user.is_authenticated:
+        return render(request, 'registration/login.html', {})
+    anomaly = Anomaly.objects.filter(id=id).get
+    pixels = Pixel.objects.filter(anomaly_id=id)
+
+    return render(request, 'showAno.html', {
+        'anomaly': anomaly,
+        'pixels': pixels
+    })
