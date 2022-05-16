@@ -29,7 +29,15 @@
 
 
     </head>
-
+    <style>
+        p{
+            font-size: 14px;
+            margin: 15px 0;
+            display: inline-block;
+            color:#000000;
+            padding: 5px 20px;
+        }
+    </style>
     <body>
 
         <!-- Begin page -->
@@ -938,6 +946,36 @@
         <script src="{% static 'assets/js/pages/form-editor.init.js'%}"></script>
 
         <script src="{% static 'assets/js/app.js'%}"></script>
+        <script>
 
+            let Mot_de_passe = document.getElementById("Mot_de_passe").value;
+            let CMot_de_passe = document.getElementById('CMot_de_passe').value;
+            let btn = document.getElementById('btn');
+            let message = getElementById("message");
+
+            btn.addEventListener('click', function() {
+                chekpass();
+            });
+            function chekpass(e){
+                alert('hello');
+                console.log(Mot_de_passe,CMot_de_passe);
+
+            
+
+                    if(Mot_de_passe == CMot_de_passe){
+                        message.textContent =" ";
+            
+                    }
+                    else{
+                        message.textContent = "password dont match";
+                    }
+                if(message.length > 0){
+                    e.preventDefault()
+                    alert("mot de passe cant be empty");
+                    message.textContent ="";
+                }
+            
+            }
+            </script>
     </body>
 </html>

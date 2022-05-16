@@ -74,12 +74,17 @@ def create(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
+        cpassword = request.POST['cpassword']
         role = request.POST['role']
 
-        user = User(None, nom, prenom, username, email, password, role)
-        user.save()
+        if password == cpassword:
+            user = User(None, nom, prenom, username, email, password, role)
+            user.save()
 
-        return redirect('/users')
+            return redirect('/users')
+        else :
+            messages.success(request, "Your passWord dont match !")
+            return render(request, 'CRUD/createUser.html', {})
 
 
 
