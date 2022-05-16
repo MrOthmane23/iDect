@@ -6,7 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .models import User,Images
+from .models import *
 
 
 def home(request):
@@ -100,12 +100,36 @@ def upload(request):
         return render(request, 'upload.html')
 
 def addAnom(request,id):
+    image = Images.objects.filter(id=id).get
     if not request.user.is_authenticated:
         return render(request, 'registration/login.html', {})
-    image = Images.objects.filter(id=id).get
-    return render(request,'anomalie.html',{
-        'image': image
-    })
+    if request.method == "GET":
+
+        return render(request,'anomalie.html',{
+            'image': image
+        })
+    else:
+
+        nom = request.POST['name']
+        desc = request.POST['desc']
+        type = request.POST['type']
+        pts = request.POST['pts']
+
+        ano = Anomaly(None,nom,desc,type,id)
+        ano.save()
+
+        id_ano = ano.id
+        points = pts.split("-")
+
+        for p in points:
+            point = p.split(";")
+            x = point[0]
+            y = point[1]
+            px = Pixel(None,x,y,id_ano)
+            px.save()
+
+        return redirect('list-ano')
+
 
 def listAnom(request):
     if not request.user.is_authenticated:
