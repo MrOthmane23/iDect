@@ -4,16 +4,20 @@
 {% load static %}
      <div class="card">
         <div class="card-body">
+            <input type="hidden" id="getImage" value="{{ image.chemin.url }}"/>
             <div class="img_container">
                 <canvas id="detect">
                 Your Browser Is Old, Use A New One
             </canvas>
-            <div class="buttons">
-                <button class="add">start</button>
+            <div id="detect_frames_control">
+                <div class="buttons">
+                    <button class="add btn btn-info">start</button>
+                </div>
             </div>
         </div>
             <div class="infos_form">
-                <form action="">
+                <form action="/users/anomalies/{{ image.id }}/add" method="post">
+                    {% csrf_token %}
                     <div class="input_group">
                         <input type="text" name="name" id="name" required>
                         <label for="name">Name</label>
@@ -26,7 +30,8 @@
                         <input type="text" name="type" id="type" required>
                         <label for="type">Type</label>
                     </div>
-                    <button class="submit" name="submit">Submit</button>
+                    <input type="hidden" id="pts_string" name="pts"/>
+                    <button class="submit" id="submit">Submit</button>
                 </form>
             </div>
         </div>
