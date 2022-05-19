@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 from .models import *
@@ -182,3 +184,12 @@ def showAno(request,id):
         'anomaly': anomaly,
         'pixels': pixels
     })
+
+def genJSON(request,id):
+    data = list(Anomaly.objects.values())
+    for el in data:
+        for e ,val in el.items():
+             if e=='id':
+                 if val == id:
+                    print(e,' : ', val)
+                    return JsonResponse(el, safe=False)

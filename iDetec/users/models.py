@@ -14,16 +14,20 @@ class Images(models.Model):
     id = models.IntegerField
     chemin = models.ImageField(upload_to="imageAno", null=True, blank=True)
 
+
 class Anomaly(models.Model):
     id = models.IntegerField
     nom = models.CharField(max_length=50)
     desc = models.CharField(max_length=100)
     type = models.CharField(max_length=50)
     image = models.ForeignKey(Images, on_delete=models.CASCADE)
+    dateAno = models.DateField(auto_now=True, null=True)
+
 
 class Pixel(models.Model):
     id = models.IntegerField
     x = models.FloatField(null=False)
     y = models.FloatField(null=False)
     anomaly = models.ForeignKey(Anomaly, on_delete=models.CASCADE)
+
 

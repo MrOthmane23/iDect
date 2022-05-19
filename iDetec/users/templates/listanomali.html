@@ -13,7 +13,9 @@
             <th>Nom</th>
             <th>Discription</th>
             <th>Type</th>
+            <th>Date</th>
             <th>Image</th>
+
 
             <th class="text-center">Action</th>
         </tr>
@@ -24,12 +26,15 @@
                 <td>{{ ano.nom }}</td>
                 <td>{{ ano.desc }}</td>
                 <td>{{ ano.type }}</td>
+                <td>{{ ano.dateAno }}</td>
                 <td><img src="{{ ano.image.chemin.url }}" width="70px" height="70px"/></td>
 
                 <td class="text-center">
 
                      <a class='btn btn-info btn-xs' href="/users/showAno/{{ ano.id }}">
                         <span class="glyphicon glyphicon-edit"></span> show Anomaly</a>
+                    <a class='btn btn-outline-success btn-xs' href="/users/genJson/{{ ano.id }}">
+                        <span class="glyphicon glyphicon-edit"></span> Genrate Json</a>
 
                 </td>
             </tr>
