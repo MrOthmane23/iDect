@@ -16,4 +16,5 @@ urlpatterns = [
     path('anomalies/', views.listAnom, name='list-ano'),
     path('listanomali/', views.listanno),
     path('showAno/<int:id>', views.showAno),
+    path('genJson/<int:id>', views.genJSON),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
